@@ -1,5 +1,7 @@
 package com.github.fatimascarneiro.selecionador;
 
+import com.github.fatimascarneiro.selecionador.model.Genero;
+import com.github.fatimascarneiro.selecionador.model.Plataforma;
 import com.github.fatimascarneiro.selecionador.repository.FilmeRepository;
 import com.github.fatimascarneiro.selecionador.repository.GeneroRepository;
 import com.github.fatimascarneiro.selecionador.repository.PlataformaRepository;
@@ -16,6 +18,11 @@ public class InsereNoBanco implements CommandLineRunner {
     private FilmeRepository filmeRepository;
     private GeneroRepository generoRepository;
     private PlataformaRepository plataformaRepository;
+
+    private Genero drama = new Genero();
+    private Genero comedia = new Genero();
+
+    private Plataforma plataforma = new Plataforma("Netflix", 123);
 
     @Autowired
     public InsereNoBanco(SerieRepository serieRepository,
@@ -35,6 +42,10 @@ public class InsereNoBanco implements CommandLineRunner {
         this.generoRepository.deleteAll();
         this.serieRepository.deleteAll();
         this.filmeRepository.deleteAll();
+
+        this.plataformaRepository.save(plataforma);
+        this.generoRepository.save(drama);
+        this.generoRepository.save(comedia);
 
     }
 }
