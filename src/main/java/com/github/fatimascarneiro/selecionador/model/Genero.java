@@ -1,5 +1,7 @@
 package com.github.fatimascarneiro.selecionador.model;
 
+import com.github.fatimascarneiro.selecionador.exception.GeneroException;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -49,5 +51,11 @@ public class Genero {
     @Override
     public int hashCode() {
         return Objects.hash(id, descricao, filmes, series);
+    }
+
+    private void plataformaSemNome() throws GeneroException {
+        if (descricao.isEmpty()) {
+            throw new GeneroException("É necessário informar qual a descrição do gênero.");
+        }
     }
 }

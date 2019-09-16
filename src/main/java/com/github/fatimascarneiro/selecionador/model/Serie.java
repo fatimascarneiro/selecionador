@@ -1,5 +1,7 @@
 package com.github.fatimascarneiro.selecionador.model;
 
+import com.github.fatimascarneiro.selecionador.exception.SerieExpection;
+
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -30,4 +32,9 @@ public class Serie {
         return nome;
     }
 
+    private void plataformaSemNome() throws SerieExpection {
+        if (nome.isEmpty()) {
+            throw new SerieExpection("É necessário informar qual o nome da série.");
+        }
+    }
 }

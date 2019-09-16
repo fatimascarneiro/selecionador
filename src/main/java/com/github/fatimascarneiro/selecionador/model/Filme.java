@@ -1,5 +1,7 @@
 package com.github.fatimascarneiro.selecionador.model;
 
+import com.github.fatimascarneiro.selecionador.exception.FilmeException;
+
 import java.time.Year;
 import java.util.Set;
 
@@ -30,5 +32,11 @@ public class Filme {
 
     public String getNome() {
         return nome;
+    }
+
+    private void plataformaSemNome() throws FilmeException {
+        if (nome.isEmpty()) {
+            throw new FilmeException("É necessário informar o nome do filme.");
+        }
     }
 }
