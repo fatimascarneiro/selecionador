@@ -25,18 +25,7 @@ public class InsereNoBanco implements CommandLineRunner {
     private GeneroRepository generoRepository;
     private PlataformaRepository plataformaRepository;
 
-    private Genero drama = new Genero();
-    private Genero comedia = new Genero();
-    private Genero romance = new Genero();
-    private Genero acao = new Genero();
 
-    private Set<Genero> generos = new HashSet<>();
-
-    private Filme filme = new Filme("Titanic", "diretor de titanic", Year.of(2000), generos);
-
-    private Serie serie = new Serie("Todo Mundo Odeia o Cris", generos);
-
-    private Plataforma plataforma = new Plataforma("Netflix", 123);
 
     @Autowired
     public InsereNoBanco(SerieRepository serieRepository,
@@ -52,6 +41,19 @@ public class InsereNoBanco implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        Genero drama = new Genero();
+        Genero comedia = new Genero();
+        Genero romance = new Genero();
+        Genero acao = new Genero();
+
+        Set<Genero> generos = new HashSet<>();
+
+        Filme filme = new Filme("Titanic", "diretor de titanic", Year.of(2000), generos);
+
+        Serie serie = new Serie("Todo Mundo Odeia o Cris", generos);
+
+        Plataforma plataforma = new Plataforma("Netflix", 123);
+
         this.plataformaRepository.deleteAll();
         this.generoRepository.deleteAll();
         this.serieRepository.deleteAll();

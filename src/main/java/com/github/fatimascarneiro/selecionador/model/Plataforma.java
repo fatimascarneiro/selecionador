@@ -43,4 +43,7 @@ public class Plataforma {
             throw new PlataformaException("A plataforma precisa ter um nome.");
         }
     }
+
+    public Plataforma() {
+    }
 }
