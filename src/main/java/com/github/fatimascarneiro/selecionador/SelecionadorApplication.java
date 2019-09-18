@@ -1,4 +1,4 @@
-package com.github.fatimascarneiro.selecionador.selecionador;
+package com.github.fatimascarneiro.selecionador;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SelecionadorApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SelecionadorApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SelecionadorApplication.class, args);
+    }
 
 }

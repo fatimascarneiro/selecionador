@@ -1,4 +1,4 @@
-package com.github.fatimascarneiro.selecionador.selecionador;
+package com.github.fatimascarneiro.selecionador;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
