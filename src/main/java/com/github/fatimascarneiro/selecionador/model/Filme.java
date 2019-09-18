@@ -39,4 +39,12 @@ public class Filme {
             throw new FilmeException("É necessário informar o nome do filme.");
         }
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

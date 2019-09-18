@@ -37,4 +37,12 @@ public class Serie {
             throw new SerieExpection("É necessário informar qual o nome da série.");
         }
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
