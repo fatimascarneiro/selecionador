@@ -44,7 +44,7 @@ public class Serie {
         return generos;
     }
 
-    public void setGeneros(Set<Genero> generos) {
-        this.generos = generos;
+    public String getProdutor() {
+        return produtor;
     }
 }

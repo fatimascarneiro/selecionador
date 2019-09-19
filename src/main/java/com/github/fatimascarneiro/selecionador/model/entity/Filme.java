@@ -49,7 +49,11 @@ public class Filme {
         return generos;
     }
 
-    public void setGeneros(Set<Genero> generos) {
-        this.generos = generos;
+    public String getDiretor() {
+        return diretor;
+    }
+
+    public Year getAno() {
+        return ano;
     }
 }
