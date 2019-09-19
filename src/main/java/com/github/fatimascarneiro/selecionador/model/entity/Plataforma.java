@@ -64,4 +64,12 @@ public class Plataforma {
     public void setFilmes(List<Filme> filmes) {
         this.filmes = filmes;
     }
+
+    public boolean temFilmes() {
+        return !naoTemFilmes();
+    }
+
+    public boolean naoTemFilmes() {
+        return filmes.isEmpty();
+    }
 }

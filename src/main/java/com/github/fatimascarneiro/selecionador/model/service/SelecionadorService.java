@@ -7,13 +7,20 @@ import com.github.fatimascarneiro.selecionador.model.entity.Plataforma;
 import com.github.fatimascarneiro.selecionador.model.entity.Serie;
 
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-//TODO: NOS MÉTODOS QUE CONFEREM SE EXISTE UM ELEMENTO E FAZEM BUSCA, TROCAR OS TIPOS DOS OBJETOS POR TIPOS REPOSITORY APÓS MUDAR O BANCO DE DADOS;
-
+/**
+ * TODO: NOS MÉTODOS QUE CONFEREM SE EXISTE UM ELEMENTO E FAZEM BUSCA, TROCAR OS TIPOS DOS OBJETOS POR TIPOS REPOSITORY APÓS MUDAR O BANCO DE DADOS;
+ * <p>
+ * Responsiblidade: a partir de uma plataforma, ou todas, algum filtro de filme ou série, deve selecionar apenas um Filme ou Série.
+ */
 public class SelecionadorService {
 
     private Set<Plataforma> plataformas = new HashSet<Plataforma>();
@@ -24,14 +31,26 @@ public class SelecionadorService {
     private Serie serie;
     private Filme filme;
 
-    private void confereSePossuiElementoNaPlataforma() throws PlataformaException {
+    private void confereSePossuiPlataforma() {
         if (plataformas.isEmpty()) {
+            throw new PlataformaException("Não existe plataforma cadastrada.");
+        }
+    }
+
+    private void confereSePossuiFilmeNaPlataforma() {
+        if (plataforma.naoTemFilmes()) {
+            throw new PlataformaException("Não é possível selecionar um elemento dessa plataforma porque ela está vazia.");
+        }
+    }
+
+    private void confereSePossuiSerieNaPlataforma() {
+        if (plataforma.getSeries().isEmpty()) {
             throw new PlataformaException("Não é possível selecionar um elemento dessa plataforma porque ela está vazia.");
         }
     }
 
     private Plataforma buscaPlataformaPeloNome(String nomeDeUmaPlataforma) {
-        confereSePossuiElementoNaPlataforma();
+        confereSePossuiPlataforma();
 
         plataformas
             .stream()
@@ -42,6 +61,8 @@ public class SelecionadorService {
     }
 
     private Optional<Serie> selecionaSerieAleatóriaDaPlataforma(Plataforma plataforma) {
+        confereSePossuiSerieNaPlataforma();
+
         Collections
             .shuffle(plataforma.getSeries());
 
@@ -52,6 +73,8 @@ public class SelecionadorService {
     }
 
     private Optional<Filme> selecionaFilmeAleatórioDaPlataforma(Plataforma plataforma) {
+        confereSePossuiFilmeNaPlataforma();
+
         Collections
             .shuffle(plataforma.getFilmes());
 
@@ -72,14 +95,13 @@ public class SelecionadorService {
     }
 
     private Set<Serie> buscaSeriePorProdutor(String produtor) {
-        coletaTodasAsSeriesDeUmaPlataforma(plataforma);
+        Set<Serie> series = coletaTodasAsSeriesDeUmaPlataforma(plataforma);
 
-        series.stream()
-            .filter(s -> serie.getProdutor().equals(produtor))
-            .map(s -> serie.getProdutor());
-
-        return series;
+        return series.stream()
+            .filter(s -> s.getProdutor().contains(produtor))
+            .collect(Collectors.toSet());
     }
+
 
     private Set<Filme> buscaFilmePorDiretor(String diretor) {
         coletaTodosOsFilmesDeUmaPlataforma(plataforma);
@@ -90,34 +112,30 @@ public class SelecionadorService {
 
         return filmes;
     }
-
-    private Set<Filme> buscaFilmePorAno(Year ano) {
-        coletaTodosOsFilmesDeUmaPlataforma(plataforma);
-
-        filmes.stream()
-            .filter(f -> filme.getAno().equals(ano))
-            .map(f -> filme.getAno());
-
-        return filmes;
-    }
+//TODO: arrumar
+//    private Set<Filme> buscaFilmePorAno(Year ano) {
+//        coletaTodosOsFilmesDeUmaPlataforma(plataforma);
+//
+//        filmes.stream()
+//            .filter(f -> filme.getAno().equals(ano))
+//            .map(f -> filme.getAno());
+//
+//        return filmes;
+//    }
 
     private Set<Serie> buscaSeriePorGenero(Genero genero) {
-        coletaTodasAsSeriesDeUmaPlataforma(plataforma);
+        Set<Serie> series = coletaTodasAsSeriesDeUmaPlataforma(plataforma);
 
-        series.stream()
-            .filter(s -> serie.getGeneros().equals(genero))
-            .map(s -> serie.getGeneros());
-
-        return series;
+        return series.stream()
+            .filter(s -> s.getGeneros().contains(genero))
+            .collect(Collectors.toSet());
     }
 
     private Set<Filme> buscaFilmePorGenero(Genero genero) {
-        coletaTodosOsFilmesDeUmaPlataforma(plataforma);
+        Set<Filme> filmes = coletaTodosOsFilmesDeUmaPlataforma(plataforma);
 
-        filmes.stream()
-            .filter(s -> filme.getGeneros().equals(genero))
-            .map(s -> filme.getGeneros());
-
-        return filmes;
+        return filmes.stream()
+            .filter(s -> s.getGeneros().contains(genero))
+            .collect(Collectors.toSet());
     }
 }
