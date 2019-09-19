@@ -58,4 +58,12 @@ public class Genero {
             throw new GeneroException("É necessário informar qual a descrição do gênero.");
         }
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
