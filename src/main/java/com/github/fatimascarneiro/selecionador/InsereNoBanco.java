@@ -14,7 +14,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -43,16 +45,27 @@ public class InsereNoBanco implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Genero drama = new Genero();
         Genero comedia = new Genero();
-        Genero romance = new Genero();
-        Genero acao = new Genero();
 
-        Set<Genero> generos = new HashSet<>();
+        Set<Genero> generosTitanic = new HashSet<>();
+        generosTitanic.add(drama);
 
-        Filme filme = new Filme("Titanic", "diretor de titanic", Year.of(2000), generos);
+        Set<Genero> generosTodoMundoOdeiaOCris = new HashSet<>();
+        generosTodoMundoOdeiaOCris.add(comedia);
 
-        Serie serie = new Serie("Todo Mundo Odeia o Cris", generos);
+        Filme filme1 = new Filme("Titanic", "Um diretor", Year.of(2000), generosTitanic);
+
+        Serie serie1 = new Serie("Todo Mundo Odeia o Cris", generosTodoMundoOdeiaOCris);
+
+        List<Filme> filmes = new ArrayList<Filme>();
+        filmes.add(filme1);
+
+        List<Serie> series = new ArrayList<Serie>();
+        series.add(serie1);
 
         Plataforma plataforma = new Plataforma("Netflix", 123);
+
+        plataforma.setFilmes(filmes);
+        plataforma.setSeries(series);
 
         this.plataformaRepository.deleteAll();
         this.generoRepository.deleteAll();
@@ -63,11 +76,10 @@ public class InsereNoBanco implements CommandLineRunner {
 
         this.generoRepository.save(drama);
         this.generoRepository.save(comedia);
-        this.generoRepository.save(romance);
-        this.generoRepository.save(acao);
 
-        this.filmeRepository.save(filme);
+        this.serieRepository.save(serie1);
+        this.filmeRepository.save(filme1);
 
-        this.serieRepository.save(serie);
+
     }
 }
