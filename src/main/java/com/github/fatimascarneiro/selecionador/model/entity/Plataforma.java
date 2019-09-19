@@ -1,6 +1,4 @@
-package com.github.fatimascarneiro.selecionador.model;
-
-import com.github.fatimascarneiro.selecionador.exception.PlataformaException;
+package com.github.fatimascarneiro.selecionador.model.entity;
 
 import java.util.List;
 
@@ -10,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Plataforma {
@@ -18,6 +17,7 @@ public class Plataforma {
     @GeneratedValue
     private int id;
 
+    @NotNull
     private String nome;
 
     @ManyToMany
@@ -38,12 +38,6 @@ public class Plataforma {
         this.id = id;
     }
 
-    private void plataformaSemNome() throws PlataformaException {
-        if (nome.isEmpty()) {
-            throw new PlataformaException("A plataforma precisa ter um nome.");
-        }
-    }
-
     public Plataforma() {
     }
 
@@ -51,16 +45,8 @@ public class Plataforma {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public List<Serie> getSeries() {

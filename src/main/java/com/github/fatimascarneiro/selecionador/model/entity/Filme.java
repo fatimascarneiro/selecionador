@@ -1,6 +1,4 @@
-package com.github.fatimascarneiro.selecionador.model;
-
-import com.github.fatimascarneiro.selecionador.exception.FilmeException;
+package com.github.fatimascarneiro.selecionador.model.entity;
 
 import java.time.Year;
 import java.util.Set;
@@ -9,17 +7,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Filme {
+
     @Id
     @GeneratedValue
     private Long id;
 
+    @NotNull
     private String nome;
+
     private String diretor;
+
     private Year ano;
 
+    @NotNull
     @ManyToMany(mappedBy = "filmes")
     private Set<Genero> generos;
 
@@ -30,20 +34,22 @@ public class Filme {
         this.generos = generos;
     }
 
-    public String getNome() {
-        return nome;
+    public Filme() {
     }
 
-    private void plataformaSemNome() throws FilmeException {
-        if (nome.isEmpty()) {
-            throw new FilmeException("É necessário informar o nome do filme.");
-        }
+    public String getNome() {
+        return nome;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Filme() {
+    public Set<Genero> getGeneros() {
+        return generos;
+    }
+
+    public void setGeneros(Set<Genero> generos) {
+        this.generos = generos;
     }
 }

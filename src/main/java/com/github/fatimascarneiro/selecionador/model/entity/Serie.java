@@ -1,6 +1,4 @@
-package com.github.fatimascarneiro.selecionador.model;
-
-import com.github.fatimascarneiro.selecionador.exception.SerieExpection;
+package com.github.fatimascarneiro.selecionador.model.entity;
 
 import java.util.Set;
 
@@ -8,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Serie {
@@ -16,10 +15,12 @@ public class Serie {
     @GeneratedValue
     private Long id;
 
+    @NotNull
     private String nome;
 
     private String produtor;
 
+    @NotNull
     @ManyToMany(mappedBy = "series")
     private Set<Genero> generos;
 
@@ -28,20 +29,22 @@ public class Serie {
         this.generos = generos;
     }
 
-    public String getNome() {
-        return nome;
+    public Serie() {
     }
 
-    private void plataformaSemNome() throws SerieExpection {
-        if (nome.isEmpty()) {
-            throw new SerieExpection("É necessário informar qual o nome da série.");
-        }
+    public String getNome() {
+        return nome;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Serie() {
+    public Set<Genero> getGeneros() {
+        return generos;
+    }
+
+    public void setGeneros(Set<Genero> generos) {
+        this.generos = generos;
     }
 }
