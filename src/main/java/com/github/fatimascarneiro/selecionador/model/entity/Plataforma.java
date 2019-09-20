@@ -1,6 +1,11 @@
 package com.github.fatimascarneiro.selecionador.model.entity;
 
+import com.github.fatimascarneiro.selecionador.exception.PlataformaException;
+
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,6 +37,7 @@ public class Plataforma {
         inverseJoinColumns = {@JoinColumn(name = "filme_id")})
     private List<Filme> filmes;
 
+    private Set<Plataforma> plataformas;
 
     public Plataforma(String nome, int id) {
         this.nome = nome;
@@ -72,4 +78,48 @@ public class Plataforma {
     public boolean naoTemFilmes() {
         return filmes.isEmpty();
     }
+
+    public void confereSePossuiFilmeNaPlataforma() {
+        if (this.naoTemFilmes()) {
+            throw new PlataformaException("Não é possível selecionar um elemento dessa plataforma porque ela está vazia.");
+        }
+    }
+
+    public void confereSePossuiSerieNaPlataforma() {
+        if (this.getSeries().isEmpty()) {
+            throw new PlataformaException("Não é possível selecionar um elemento dessa plataforma porque ela está vazia.");
+        }
+    }
+
+    private Plataforma buscaPlataformaPeloNome(String nomeDeUmaPlataforma) {
+
+        plataformas
+            .stream()
+            .filter(p -> equals(this.getNome()))
+            .findFirst();
+
+        return this;
+    }
+
+    public Set<Serie> coletaTodasAsSeriesDeUmaPlataforma(Plataforma plataforma) {
+        plataforma.getSeries().addAll(series);
+        return (Set<Serie>) series;
+    }
+
+    public Set<Filme> coletaTodosOsFilmesDeUmaPlataforma(Plataforma plataforma) {
+        plataforma.getFilmes().addAll(filmes);
+        return (Set<Filme>) filmes;
+    }
+
+    public Optional<Filme> selecionaFilmeAleatórioDaPlataforma(Plataforma plataforma) {
+
+        Collections
+            .shuffle(plataforma.getFilmes());
+
+        return plataforma
+            .getFilmes()
+            .stream()
+            .findFirst();
+    }
+
 }

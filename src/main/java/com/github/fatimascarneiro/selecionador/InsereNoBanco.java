@@ -28,7 +28,6 @@ public class InsereNoBanco implements CommandLineRunner {
     private PlataformaRepository plataformaRepository;
 
 
-
     @Autowired
     public InsereNoBanco(SerieRepository serieRepository,
                          FilmeRepository filmeRepository,
@@ -79,7 +78,6 @@ public class InsereNoBanco implements CommandLineRunner {
 
         this.serieRepository.save(serie1);
         this.filmeRepository.save(filme1);
-
 
     }
 }

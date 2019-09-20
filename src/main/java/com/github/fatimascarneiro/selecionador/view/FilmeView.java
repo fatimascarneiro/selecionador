@@ -29,4 +29,8 @@ public class FilmeView {
     public Set<Genero> getGeneros() {
         return generos;
     }
+
+    public void setGeneros(Set<Genero> generos) {
+        this.generos = generos;
+    }
 }

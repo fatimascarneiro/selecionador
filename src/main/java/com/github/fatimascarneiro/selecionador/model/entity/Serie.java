@@ -1,6 +1,9 @@
 package com.github.fatimascarneiro.selecionador.model.entity;
 
+import java.util.Collections;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,6 +32,8 @@ public class Serie {
         this.generos = generos;
     }
 
+    private Set<Serie> series;
+
     public Serie() {
     }
 
@@ -46,5 +51,28 @@ public class Serie {
 
     public String getProdutor() {
         return produtor;
+    }
+
+    private Optional<Serie> selecionaSerieAleatóriaDaPlataforma(Plataforma plataforma) {
+
+        Collections
+            .shuffle(plataforma.getSeries());
+
+        return plataforma
+            .getSeries()
+            .stream()
+            .findFirst();
+    }
+
+    private Set<Serie> buscaSeriePorProdutor(String produtor) {
+        return series.stream()
+            .filter(s -> s.getProdutor().contains(produtor))
+            .collect(Collectors.toSet());
+    }
+
+    private Set<Serie> buscaSeriePorGenero(Genero genero) {
+        return series.stream()
+            .filter(s -> s.getGeneros().contains(genero))
+            .collect(Collectors.toSet());
     }
 }
