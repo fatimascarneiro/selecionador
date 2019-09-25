@@ -91,16 +91,6 @@ public class Plataforma {
         }
     }
 
-    private Plataforma buscaPlataformaPeloNome(String nomeDeUmaPlataforma) {
-
-        plataformas
-            .stream()
-            .filter(p -> equals(this.getNome()))
-            .findFirst();
-
-        return this;
-    }
-
     public Set<Serie> coletaTodasAsSeriesDeUmaPlataforma(Plataforma plataforma) {
         plataforma.getSeries().addAll(series);
         return (Set<Serie>) series;
