@@ -37,8 +37,6 @@ public class Plataforma {
         inverseJoinColumns = {@JoinColumn(name = "filme_id")})
     private List<Filme> filmes;
 
-    private Set<Plataforma> plataformas;
-
     public Plataforma(String nome, int id) {
         this.nome = nome;
         this.id = id;

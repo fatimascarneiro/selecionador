@@ -24,6 +24,6 @@ public class PlataformaView  {
     public PlataformaView(Plataforma plataforma){
         this.nome = plataforma.getNome();
         this.series = SerieView.from(plataforma.getSeries());
-        // TODO: converter filmes em filmesView
+        this.filmes = FilmeView.from(plataforma.getFilmes());
     }
 }

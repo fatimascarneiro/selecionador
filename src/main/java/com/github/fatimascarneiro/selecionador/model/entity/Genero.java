@@ -60,4 +60,12 @@ public class Genero {
     public String getDescricao() {
         return descricao;
     }
+
+    public Set<Filme> getFilmes() {
+        return filmes;
+    }
+
+    public Set<Serie> getSeries() {
+        return series;
+    }
 }

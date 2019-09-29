@@ -28,8 +28,6 @@ public class Filme {
     @ManyToMany(mappedBy = "filmes")
     private Set<Genero> generos;
 
-    Set<Filme> filmes;
-
     public Filme(String nome, String diretor, Year ano, Set<Genero> generos) {
         this.nome = nome;
         this.diretor = diretor;
@@ -58,30 +56,5 @@ public class Filme {
 
     public Year getAno() {
         return ano;
-    }
-
-    private Set<Filme> buscaFilmePorDiretor(String diretor) {
-        filmes.stream()
-            .filter(f -> this.getDiretor().equals(diretor))
-            .map(f -> this.getDiretor());
-
-        return filmes;
-    }
-
-    //TODO: arrumar
-//    private Set<Filme> buscaFilmePorAno(Year ano) {
-//        coletaTodosOsFilmesDeUmaPlataforma(plataforma);
-//
-//        filmes.stream()
-//            .filter(f -> filme.getAno().equals(ano))
-//            .map(f -> filme.getAno());
-//
-//        return filmes;
-//    }
-
-    private Set<Filme> buscaFilmePorGenero(Genero genero) {
-        return filmes.stream()
-            .filter(s -> s.getGeneros().contains(genero))
-            .collect(Collectors.toSet());
     }
 }

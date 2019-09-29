@@ -32,8 +32,6 @@ public class Serie {
         this.generos = generos;
     }
 
-    private Set<Serie> series;
-
     public Serie() {
     }
 
@@ -62,17 +60,5 @@ public class Serie {
             .getSeries()
             .stream()
             .findFirst();
-    }
-
-    private Set<Serie> buscaSeriePorProdutor(String produtor) {
-        return series.stream()
-            .filter(s -> s.getProdutor().contains(produtor))
-            .collect(Collectors.toSet());
-    }
-
-    private Set<Serie> buscaSeriePorGenero(Genero genero) {
-        return series.stream()
-            .filter(s -> s.getGeneros().contains(genero))
-            .collect(Collectors.toSet());
     }
 }

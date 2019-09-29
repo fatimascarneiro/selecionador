@@ -33,19 +33,6 @@ public class SerieView {
     }
 
     public static List<SerieView> from(List<Serie> series) {
-        // Java 7-
-//        List<SerieView> seriesView = new ArrayList<>();
-//
-//        for (int i = 0; i < series.size(); i++) {
-//
-//            SerieView serie = new SerieView(series.get(i));
-//
-//            seriesView.add(serie);
-//        }
-//
-//        return seriesView;
-
-        // java 8
         return series
             .stream()
             .map(SerieView::new)
