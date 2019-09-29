@@ -1,6 +1,4 @@
-package com.github.fatimascarneiro.selecionador.model;
-
-import com.github.fatimascarneiro.selecionador.exception.GeneroException;
+package com.github.fatimascarneiro.selecionador.model.entity;
 
 import java.util.Objects;
 import java.util.Set;
@@ -11,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Genero {
@@ -19,6 +18,7 @@ public class Genero {
     @GeneratedValue
     private int id;
 
+    @NotNull
     private String descricao;
 
     @ManyToMany
@@ -53,17 +53,11 @@ public class Genero {
         return Objects.hash(id, descricao, filmes, series);
     }
 
-    private void plataformaSemNome() throws GeneroException {
-        if (descricao.isEmpty()) {
-            throw new GeneroException("É necessário informar qual a descrição do gênero.");
-        }
-    }
-
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getDescricao() {
+        return descricao;
     }
 }

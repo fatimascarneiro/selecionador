@@ -1,9 +1,9 @@
 package com.github.fatimascarneiro.selecionador;
 
-import com.github.fatimascarneiro.selecionador.model.Filme;
-import com.github.fatimascarneiro.selecionador.model.Genero;
-import com.github.fatimascarneiro.selecionador.model.Plataforma;
-import com.github.fatimascarneiro.selecionador.model.Serie;
+import com.github.fatimascarneiro.selecionador.model.entity.Filme;
+import com.github.fatimascarneiro.selecionador.model.entity.Genero;
+import com.github.fatimascarneiro.selecionador.model.entity.Plataforma;
+import com.github.fatimascarneiro.selecionador.model.entity.Serie;
 import com.github.fatimascarneiro.selecionador.repository.FilmeRepository;
 import com.github.fatimascarneiro.selecionador.repository.GeneroRepository;
 import com.github.fatimascarneiro.selecionador.repository.PlataformaRepository;
@@ -26,7 +26,6 @@ public class InsereNoBanco implements CommandLineRunner {
     private FilmeRepository filmeRepository;
     private GeneroRepository generoRepository;
     private PlataformaRepository plataformaRepository;
-
 
 
     @Autowired
@@ -79,7 +78,6 @@ public class InsereNoBanco implements CommandLineRunner {
 
         this.serieRepository.save(serie1);
         this.filmeRepository.save(filme1);
-
 
     }
 }
